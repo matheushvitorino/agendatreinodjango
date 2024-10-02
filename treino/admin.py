@@ -3,17 +3,17 @@ from .models import TipoTreino,Treino,Exercicio
 
 
 class TipoTreinoAdmin(admin.ModelAdmin):
-    list_display=('nome')
-    search_fields=('nome')
+    list_display=('nome',)
+    search_fields=('nome',)
 
-class ExercicioAdmin(admin.ModelAdmin)
-    list_display=('nome')
-    search_fields=('nome')
+class ExercicioAdmin(admin.ModelAdmin):
+    list_display=('nome',)
+    search_fields=('nome',)
     
 class TreinoAdmin(admin.ModelAdmin):
-    list_display=('exercicio','tipo','series','repeticoes')
+    list_display=('tipo','series','repeticoes')
     search_fields=('tipo','exercicio')
-    filter_horizontal=('tipo','exercicio')
+    filter_horizontal=('exercicio',)
 
 admin.site.register(TipoTreino, TipoTreinoAdmin)
 admin.site.register(Exercicio, ExercicioAdmin)
