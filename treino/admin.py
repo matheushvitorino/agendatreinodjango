@@ -5,6 +5,7 @@ class TipoTreinoAdmin(admin.ModelAdmin):
     list_display=('nome',)
     search_fields=('nome',)
 
+
 class TreinoExercicioInline(admin.TabularInline):
     model = TreinoExercicio
 

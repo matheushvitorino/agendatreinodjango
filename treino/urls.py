@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns =[
-    path('treino/', views.treino, name="treino"),
+    path('tipo_treino/', views.TipoTreinoFormView.as_view(), name="tipo_treino"),
+    path('exercicio/', views.ExercicioFormView.as_view(), name='exercicio')
 ]
