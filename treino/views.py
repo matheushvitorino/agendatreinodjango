@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
 from django.views.generic.edit import FormView
-from .forms import FormTipoTreino,FormExercicio,FormTreino
+from .forms import FormTipoTreino,FormExercicio,FormTreino, FormSetTreinoExercicio
 from .models import TipoTreino,Exercicio,Treino
 
 # Create your views here.
@@ -29,16 +29,26 @@ class ExercicioFormView(FormView):
         return super().form_valid(form)
     
 class TreinoFormView(FormView):
-    template_name='form.html'
+    template_name='formwithformset.html'
     form_class= FormTreino 
-    success_url = HttpResponse('success method')
+    success_url = HttpResponse('<p> succes method </p>')
+    formset = FormSetTreinoExercicio()
+    
+    # metodo para adicionar o formset, adicionado ao context do view
+    def get_context_data(self, **kwargs)-> dict[str,any]:
+        context= super().get_context_data(**kwargs)
+        context['formset']= FormSetTreinoExercicio()
+        return context
+
+    
+    
     
     def form_valid(self,form):
         tipo_id = form.cleaned_data['tipo']
         exercicio = form.cleaned_data['exercicio']
         series = form.cleaned_data['series']
         repeticoes = form.cleaned_data['repeticoes']
-        treino = Treino(exercicio=exercicio,tipo=tipo_id,series=series,repeticoes=repeticoes)
+        treino = Treino(tipo=tipo_id, exercicio=exercicio, series=series,repeticoes=repeticoes)
         treino.save()
         return super().form_valid(form)
     

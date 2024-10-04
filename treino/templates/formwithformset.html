@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{ formset.management_form }}
+    <form method="post">{% csrf_token %}
+
+        {{ form.as_p }}
+
+        {% for forms in formset %}
+            {{ forms }}
+        {% endfor %}
+        {%if formset.can_delete %}
+            <li>{{ formset.DELETE }}</li>
+        {% endif %}
+        <input type="submit" value="Send message">
+    </form>
+</body>
+</html>
