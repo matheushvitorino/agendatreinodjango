@@ -6,13 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    {{ formset.management_form }}
+
     <form method="post">{% csrf_token %}
 
         {{ form.as_p }}
 
-        {% for forms in formset %}
-            {{ forms }}
+        {{ formset.management_form }}
+
+        {% for form in formset %}
+            {{ form }}
         {% endfor %}
         {%if formset.can_delete %}
             <li>{{ formset.DELETE }}</li>

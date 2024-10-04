@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
 from django.views.generic.edit import FormView
 from .forms import FormTipoTreino,FormExercicio,FormTreino, FormSetTreinoExercicio
-from .models import TipoTreino,Exercicio,Treino
+from .models import TipoTreino,Exercicio,Treino,TreinoExercicio
 
 # Create your views here.
 class TipoTreinoFormView(FormView):
@@ -22,8 +22,7 @@ class ExercicioFormView(FormView):
     
     def form_valid(self,form):
         nome = form.cleaned_data['nome']
-        tipo_id = form.cleaned_data['tipo']
-        tipo = get_object_or_404(TipoTreino, id = tipo_id)
+        tipo = form.cleaned_data['tipo_de_treino']
         exercicio = Exercicio(tipo=tipo,nome=nome)
         exercicio.save()
         return super().form_valid(form)
@@ -44,13 +43,32 @@ class TreinoFormView(FormView):
     
     
     def form_valid(self,form):
-        tipo_id = form.cleaned_data['tipo']
-        exercicio = form.cleaned_data['exercicio']
-        series = form.cleaned_data['series']
-        repeticoes = form.cleaned_data['repeticoes']
-        treino = Treino(tipo=tipo_id, exercicio=exercicio, series=series,repeticoes=repeticoes)
+        
+        tipo = form.cleaned_data['tipo_de_treino']
+        treino = Treino(tipo=tipo)
         treino.save()
-        return super().form_valid(form)
+        
+        formset = self.get_form(FormSetTreinoExercicio)
+        
+        if formset.is_valid():
+            
+            for form in formset:
+        
+                exercicio = form.cleaned_data['exercicio']
+                series = form.cleaned_data['series']
+                repeticoes = form.cleaned_data['repeticoes']
+                
+                treino_exercicio = TreinoExercicio(
+                    treino=treino,
+                    exercicio=exercicio, 
+                    series=series,
+                    repeticoes=repeticoes)
+                
+                treino_exercicio.save()
+
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(formset)
     
 
         

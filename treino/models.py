@@ -19,7 +19,7 @@ class Exercicio(models.Model):
 class Treino(models.Model):
 
     exercicio = models.ManyToManyField(Exercicio, related_name='treinos',through='TreinoExercicio' )
-    tipo = models.OneToOneField(TipoTreino, on_delete=models.PROTECT)
+    tipo = models.ForeignKey(TipoTreino, on_delete=models.PROTECT)
     criado = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

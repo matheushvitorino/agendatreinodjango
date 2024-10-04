@@ -1,6 +1,7 @@
 from django import forms
 from .models import TipoTreino,Treino,Exercicio,TreinoExercicio
 from django.forms import formset_factory
+
 class FormTipoTreino(forms.Form):
     nome = forms.CharField(max_length=100)
     
@@ -12,7 +13,7 @@ class FormExercicio(forms.Form):
     nome = forms.CharField(max_length=100)
     tipo_de_treino = forms.ModelChoiceField(
         queryset=TipoTreino.objects.all(),
-        empty_label=None,
+        empty_label=None
         )
 
     
