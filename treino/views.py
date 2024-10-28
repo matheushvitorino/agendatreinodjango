@@ -33,41 +33,29 @@ class TreinoFormView(FormView):
     success_url = HttpResponse('<p> succes method </p>')
     formset = FormSetTreinoExercicio()
     
-    # metodo para adicionar o formset, adicionado ao context do view
-    def get_context_data(self, **kwargs)-> dict[str,any]:
+    #adicionar o formset, adicionado ao context do view
+    def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['formset']= FormSetTreinoExercicio()
         return context
-
-    
-    
-    
+   
+    #ultima coisa q arrumei ontem 28/10, falta arrumar o else
     def form_valid(self,form):
         
-        tipo = form.cleaned_data['tipo']
-        treino = Treino(tipo=tipo)
-        treino.save()
         formset = self.get_form(FormSetTreinoExercicio)
         
-        if formset.is_valid():
-            
-            for form in formset:
-        
-                exercicio = form.cleaned_data['exercicio']
-                series = form.cleaned_data['series']
-                repeticoes = form.cleaned_data['repeticoes']
-                
-                treino_exercicio = TreinoExercicio(
-                    treino=treino,
-                    exercicio=exercicio, 
-                    series=series,
-                    repeticoes=repeticoes)
-                
-                treino_exercicio.save()
-
+        if form.is_valid() and formset.is_valid():    
+            treino_salvo = form.save()
+            formset.instance = treino_salvo
+            formset.save()                    
             return super().form_valid(form)
         else:
             return self.form_invalid(formset)
+            
+
+
+
+
     
 
         
