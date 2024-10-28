@@ -22,7 +22,7 @@ class ExercicioFormView(FormView):
     
     def form_valid(self,form):
         nome = form.cleaned_data['nome']
-        tipo = form.cleaned_data['tipo_de_treino']
+        tipo = form.cleaned_data['tipo']
         exercicio = Exercicio(tipo=tipo,nome=nome)
         exercicio.save()
         return super().form_valid(form)
@@ -44,10 +44,9 @@ class TreinoFormView(FormView):
     
     def form_valid(self,form):
         
-        tipo = form.cleaned_data['tipo_de_treino']
+        tipo = form.cleaned_data['tipo']
         treino = Treino(tipo=tipo)
         treino.save()
-        
         formset = self.get_form(FormSetTreinoExercicio)
         
         if formset.is_valid():

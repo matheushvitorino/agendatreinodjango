@@ -8,17 +8,19 @@
 <body>
 
     <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
 
         {{ form.as_p }}
 
-        {{ formset.management_form }}
+
 
         {% for form in formset %}
+
             {{ form }}
+
+            
         {% endfor %}
-        {%if formset.can_delete %}
-            <li>{{ formset.DELETE }}</li>
-        {% endif %}
+
         <input type="submit" value="Send message">
     </form>
 </body>

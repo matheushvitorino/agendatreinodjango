@@ -17,7 +17,6 @@ class Exercicio(models.Model):
     
     
 class Treino(models.Model):
-
     exercicio = models.ManyToManyField(Exercicio, related_name='treinos',through='TreinoExercicio' )
     tipo = models.ForeignKey(TipoTreino, on_delete=models.PROTECT)
     criado = models.DateTimeField(auto_now_add=True)
