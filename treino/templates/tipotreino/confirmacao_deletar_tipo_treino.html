@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de exclusão</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p> tem certeza que deseja excluir esse tipo de treino "{{tipos.nome}}"?</p>
+        {{ form }}
+        <input type="submit" value="Confirm">
+        <a href="{% url 'lista_tipo_treino' %}">Não</a>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tipos de treino</title>
+</head>
+
+<body>
+    <h1> Lista de Tipos de treino</h1>
+    <a href="{% url 'criar_tipo_treino'%}">Criar tipo de treino</a>
+
+    <ul>
+        {% for tipo in tipos %}
+            <li>
+                {{tipo.nome}}
+                <a href="{% url 'deletar_tipo_treino' tipo.pk %}">Deletar</a>
+                <a href="{% url 'editar_tipo_treino' tipo.pk %}">Editar</a>
+            </li>
+        {%endfor%}
+    </ul>
+
+</body>
+
+</html>

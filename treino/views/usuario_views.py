@@ -16,12 +16,12 @@ class UsuarioFormView(FormView):
     
 class UsuarioListView(ListView):
     model = Usuario
-    template_name = "listausuario.html"
+    template_name = "usuario/lista_usuario.html"
     context_object_name = "usuarios"
     
 class UsuarioDeleteView(DeleteView):
     model = Usuario
-    template_name = "confirmacao_deletar_usuario.html"
+    template_name = "usuario/confirmacao_deletar_usuario.html"
     success_url = reverse_lazy('lista_usuario')
     
 class UsuarioUpdateView(UpdateView):

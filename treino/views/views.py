@@ -14,14 +14,14 @@ from ..models import TipoTreino,Exercicio,Treino,TreinoExercicio
         form.save()
         return super().form_valid(form)"""           
     
-class TipoTreinoFormView(FormView):
+"""class TipoTreinoFormView(FormView):
     template_name='form.html'
     form_class= FormTipoTreino
     success_url=HttpResponse('success method ')
     
     def form_valid(self,form):
         form.save()
-        return super().form_valid(form)
+        return super().form_valid(form)"""
     
 class ExercicioFormView(FormView):
     template_name='form.html'

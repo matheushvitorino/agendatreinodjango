@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Exercicios</title>
+</head>
+
+<body>
+    <h1>Lista de Exercicios</h1>
+    <a href="{% url 'criar_exercicio'%}">Criar tipo de treino</a>
+    <ul>
+        {% for exercicio in exercicios%}
+            <li>
+                {{exercicio}}
+                <a href="{% url 'deletar_exercicio' exercicio.pk %}">Deletar</a>
+                <a href="{% url 'editar_exercicio' exercicio.pk %}">Editar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

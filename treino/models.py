@@ -16,7 +16,7 @@ class TipoTreino(models.Model):
 
 class Exercicio(models.Model):
     nome = models.CharField(max_length=100)
-    tipo = models.ForeignKey(TipoTreino, on_delete=models.PROTECT)
+    tipo = models.ForeignKey(TipoTreino, on_delete=models.PROTECT,related_name='exercicios')
     
     def __str__(self):
         return f'{self.nome} de {self.tipo}'
