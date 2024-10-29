@@ -5,5 +5,6 @@ from . import views
 urlpatterns =[
     path('tipo_treino/', views.TipoTreinoFormView.as_view(), name="tipo_treino"),
     path('exercicio/', views.ExercicioFormView.as_view(), name='exercicio'),
-    path('treino/', views.TreinoFormView.as_view(), name='treino')
+    path('treino/', views.TreinoFormView.as_view(), name='treino'),
+    path('usuario/', views.UsuarioFormView.as_view(), name='usuario'),
 ]

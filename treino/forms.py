@@ -1,8 +1,12 @@
 from django import forms
 from django.forms import ModelForm
-from .models import TipoTreino,Treino,Exercicio,TreinoExercicio
-from django.forms import formset_factory
+from .models import TipoTreino,Treino,Exercicio,TreinoExercicio,Usuario
 from django.forms.models import inlineformset_factory
+
+class FormUsuario(ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ["nome"]
 
 
     

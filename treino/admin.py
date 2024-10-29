@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import TipoTreino,Treino,Exercicio,TreinoExercicio
+from .models import TipoTreino,Treino,Exercicio,TreinoExercicio,Usuario
 
+class UsuarioAdmin(admin.ModelAdmin):
+    list_display=('nome',)
+    search_fields=('nome',)
+    
+    
 class TipoTreinoAdmin(admin.ModelAdmin):
     list_display=('nome',)
     search_fields=('nome',)
@@ -14,10 +19,11 @@ class ExercicioAdmin(admin.ModelAdmin):
     search_fields=('nome',)
     
 class TreinoAdmin(admin.ModelAdmin):
-    list_display=('tipo',)
-    search_fields=('tipo','exercicio')
+    list_display=('nome','tipo')
+    search_fields=('nome','tipo','exercicio',)
     inlines = [TreinoExercicioInline]
     
 admin.site.register(TipoTreino, TipoTreinoAdmin)
 admin.site.register(Exercicio, ExercicioAdmin)
 admin.site.register(Treino, TreinoAdmin)
+admin.site.register(Usuario, UsuarioAdmin)
