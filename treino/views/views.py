@@ -1,18 +1,18 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
 from django.views.generic.edit import FormView
-from .forms import FormTipoTreino,FormExercicio,FormTreino, FormSetTreinoExercicio,FormUsuario
-from .models import TipoTreino,Exercicio,Treino,TreinoExercicio
+from ..forms import FormTipoTreino,FormExercicio,FormTreino, FormSetTreinoExercicio,FormUsuario
+from ..models import TipoTreino,Exercicio,Treino,TreinoExercicio
 
 # Create your views here.
-class UsuarioFormView(FormView):
+
+"""class UsuarioFormView(FormView):
     template_name="form.html"
     form_class= FormUsuario
     success_url = HttpResponse("success")
     
     def form_valid(self,form):
         form.save()
-        return super().form_valid(form)
-            
+        return super().form_valid(form)"""           
     
 class TipoTreinoFormView(FormView):
     template_name='form.html'
