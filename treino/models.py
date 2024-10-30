@@ -20,12 +20,11 @@ class Exercicio(models.Model):
     
     def __str__(self):
         return f'{self.nome} de {self.tipo}'
-    
-    
+
+   
 class Treino(models.Model):
     usuario = models.ForeignKey(Usuario, related_name='treinos', on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
-    exercicio = models.ManyToManyField(Exercicio, related_name='treinos',through='TreinoExercicio' )
     tipo = models.ForeignKey(TipoTreino, on_delete=models.PROTECT)
     criado = models.DateTimeField(auto_now_add=True)
     
@@ -33,13 +32,15 @@ class Treino(models.Model):
         return f'Treino {self.nome} de {self.tipo} criado {self.criado}'
     
 class TreinoExercicio(models.Model):
-    treino = models.ForeignKey(Treino, on_delete=models.CASCADE)
     exercicio = models.ForeignKey(Exercicio, on_delete=models.CASCADE)
     series = models.IntegerField(choices=[(3, 3), (4, 4), (5, 5), (6, 6)], default=3)
     repeticoes = models.IntegerField()
+    treino = models.ForeignKey(Treino, on_delete=models.CASCADE )
     
     def __str__(self):
         return f'Exercicio de {self.exercicio} {self.series}x{self.repeticoes}'
+    
+
     
 
     

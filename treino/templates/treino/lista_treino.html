@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de  treino</title>
+</head>
+
+<body>
+    <h1> Lista de  treino</h1>
+    <a href="{% url 'criar_treino'%}">Criar tipo de treino</a>
+
+
+        {% for treino in treinos %}
+
+                {{treino.usuario}}
+                {{treino.nome}}
+                {{treino.tipo}}
+                {{treino.criado}}
+                <a href="{% url 'deletar_treino' treino.pk %}">Deletar</a>
+                <a href="{% url 'editar_treino' treino.pk %}">Editar</a>
+                <ul>
+                    
+                    {% for treino_exercicio in treino.treinoexercicio_set.all %}
+                    <li>
+                        {{treino_exercicio.exercicio.nome}}
+                        {{treino_exercicio.series}}
+                        {{treino_exercicio.repeticoes}}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+        {%empty%}
+        |<p> voce nao term treinos cadastrados</p>
+        {%endfor%}
+
+
+</body>
+
+</html>

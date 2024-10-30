@@ -28,9 +28,13 @@ class FormExercicio(ModelForm):
 class FormTreino(ModelForm):
     class Meta:
         model = Treino
-        fields = ["tipo"]
+        fields = ["tipo","usuario","nome"]
         tipo = forms.ModelChoiceField(
             queryset = TipoTreino.objects.all(),
+            required=True,
+        )
+        usuario = forms.ModelChoiceField(
+            queryset = Usuario.objects.all(),
             required=True,
         )    
     
@@ -52,6 +56,11 @@ class FormTreinoExercicio(ModelForm):
 FormSetTreinoExercicio = inlineformset_factory( Treino, TreinoExercicio,
                                                form=FormTreinoExercicio, extra=1
     )
+
+FormSetEditarTreinoExercicio = inlineformset_factory( Treino, TreinoExercicio,
+                                               form=FormTreinoExercicio,
+    )
+
 
 
 
