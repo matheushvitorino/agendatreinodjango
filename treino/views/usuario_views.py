@@ -1,9 +1,7 @@
-from datetime import timezone
-from django.http import HttpResponse
 from django.urls import reverse_lazy
 from treino.forms import FormUsuario
 from django.views.generic import DeleteView,ListView,UpdateView,FormView
-from treino.models import Usuario
+from django.contrib.auth.models import User
 
 class UsuarioFormView(FormView):
     template_name="form.html"
@@ -15,17 +13,17 @@ class UsuarioFormView(FormView):
         return super().form_valid(form)
     
 class UsuarioListView(ListView):
-    model = Usuario
+    model = User
     template_name = "usuario/lista_usuario.html"
     context_object_name = "usuarios"
     
 class UsuarioDeleteView(DeleteView):
-    model = Usuario
+    model = User
     template_name = "usuario/confirmacao_deletar_usuario.html"
     success_url = reverse_lazy('lista_usuario')
     
 class UsuarioUpdateView(UpdateView):
-    model = Usuario
+    model = User
     template_name="form.html"
     form_class= FormUsuario
     success_url = reverse_lazy('lista_usuario')

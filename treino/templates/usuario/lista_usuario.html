@@ -13,7 +13,7 @@
 
     <ul>
         {% for usuario in usuarios %}
-        <li>{{usuario.nome}}</li>
+        <li>{{usuario.username}}</li>
         <a href="{% url 'deletar_usuario' usuario.pk %}">Deletar</a>
         <a href="{% url 'editar_usuario' usuario.pk %}">Editar</a>
         {%endfor%}

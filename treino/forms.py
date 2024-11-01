@@ -1,12 +1,13 @@
 from django import forms
 from django.forms import ModelForm
-from .models import TipoTreino,Treino,Exercicio,TreinoExercicio,Usuario
+from .models import TipoTreino,Treino,Exercicio,TreinoExercicio
 from django.forms.models import inlineformset_factory
+from django.contrib.auth.models import User
 
 class FormUsuario(ModelForm):
     class Meta:
-        model = Usuario
-        fields = ["nome"]
+        model = User
+        fields = ["username","password"]
 
 
     
@@ -34,7 +35,7 @@ class FormTreino(ModelForm):
             required=True,
         )
         usuario = forms.ModelChoiceField(
-            queryset = Usuario.objects.all(),
+            queryset = User.objects.all(),
             required=True,
         )    
     

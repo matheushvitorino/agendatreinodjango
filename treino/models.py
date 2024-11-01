@@ -1,12 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Usuario(models.Model):
-    nome = models.CharField(max_length=100)
-    
-    def _str__(self):
-        return f' Usuario {self.nome}'
-
 class TipoTreino(models.Model):
     nome = models.CharField(max_length=100)
     
@@ -23,7 +18,7 @@ class Exercicio(models.Model):
 
    
 class Treino(models.Model):
-    usuario = models.ForeignKey(Usuario, related_name='treinos', on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, related_name='treinos', on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
     tipo = models.ForeignKey(TipoTreino, on_delete=models.PROTECT)
     criado = models.DateTimeField(auto_now_add=True)

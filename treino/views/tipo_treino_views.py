@@ -1,5 +1,4 @@
 from django.views.generic import DeleteView,ListView,UpdateView,FormView
-from django.http import HttpResponse
 from treino.forms import FormTipoTreino
 from treino.models import TipoTreino
 from django.urls import reverse_lazy
