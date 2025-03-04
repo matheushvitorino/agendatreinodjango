@@ -47,15 +47,16 @@ class FormTreinoExercicio(ModelForm):
     
     exercicio = forms.ModelChoiceField(
         queryset=Exercicio.objects.all(),
-        empty_label=None,
+
         )
     
     series = forms.ChoiceField(choices=numero_series,
                                initial=3)    
-
+    
+    
 # metodo para adicionar lista de formularios
 FormSetTreinoExercicio = inlineformset_factory( Treino, TreinoExercicio,
-                                               form=FormTreinoExercicio, extra=1
+                                               form=FormTreinoExercicio, extra=1,can_delete=False
     )
 
 FormSetEditarTreinoExercicio = inlineformset_factory( Treino, TreinoExercicio,
