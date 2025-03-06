@@ -1,7 +1,10 @@
 from django.urls import reverse_lazy
 from treino.forms import FormUsuario
 from django.views.generic import DeleteView,ListView,UpdateView,FormView
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render
 
 class UsuarioFormView(FormView):
     template_name="form.html"
@@ -28,4 +31,9 @@ class UsuarioUpdateView(UpdateView):
     form_class= FormUsuario
     success_url = reverse_lazy('lista_usuario')
     
-            
+class CustomLoginView(LoginView):
+    form_class =AuthenticationForm
+    
+    def get_success_url(self):
+        return render('home.html')
+          

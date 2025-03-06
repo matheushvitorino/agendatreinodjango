@@ -1,6 +1,6 @@
 from django.urls import path
 from treino.views.treino_views import TreinoDeleteView,TreinoListView,TreinoFormView,TreinoUpdateView
-from .views.usuario_views import UsuarioListView, UsuarioDeleteView, UsuarioFormView, UsuarioUpdateView
+from .views.usuario_views import UsuarioListView, UsuarioDeleteView, UsuarioFormView, UsuarioUpdateView,CustomLoginView
 from .views.tipo_treino_views import TipoTreinoDeleteView,TipoTreinoFormView,TipoTreinoListView,TipoTreinoUpdateView
 from .views.exercicio_views import ExercicioDeleteView,ExercicioFormView,ExercicioListView,ExercicioUpdateView
 
@@ -26,5 +26,6 @@ urlpatterns =[
     path('criar_exercicio/', ExercicioFormView.as_view(), name='criar_exercicio'),
     path('deletar_exercicio/<int:pk>', ExercicioDeleteView.as_view(), name='deletar_exercicio'),
     path('editar_exercicio/<int:pk>', ExercicioUpdateView.as_view(), name='editar_exercicio'),
-    
-]
+    #URL de login
+    path('login/', CustomLoginView.as_view(), name="login"),
+]   

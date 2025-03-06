@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from treino.views.home_views import home
+from django.contrib.auth.views import LoginView
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('treino/', include('treino.urls')),
+    path('login/', LoginView.as_view(), name='login'),
 ]
