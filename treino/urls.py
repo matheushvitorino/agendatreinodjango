@@ -3,7 +3,7 @@ from treino.views.treino_views import TreinoDeleteView,TreinoListView,TreinoForm
 from .views.usuario_views import UsuarioListView, UsuarioDeleteView, UsuarioFormView, UsuarioUpdateView,CustomLoginView
 from .views.tipo_treino_views import TipoTreinoDeleteView,TipoTreinoFormView,TipoTreinoListView,TipoTreinoUpdateView
 from .views.exercicio_views import ExercicioDeleteView,ExercicioFormView,ExercicioListView,ExercicioUpdateView
-
+from django.contrib.auth.views import LogoutView
 urlpatterns =[
 
     #Urls de Treino
@@ -28,4 +28,7 @@ urlpatterns =[
     path('editar_exercicio/<int:pk>', ExercicioUpdateView.as_view(), name='editar_exercicio'),
     #URL de login
     path('login/', CustomLoginView.as_view(), name="login"),
+    path('logout/',LogoutView.as_view(), name='logout'),
 ]   
+
+

@@ -125,4 +125,10 @@ STATIC_FILE_DIRS = [os.path.join(BASE_DIR,'templates/static')]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#configuraçoes de login
 LOGIN_URL ='/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 3600  # A sessão vai expirar após 1 hora
