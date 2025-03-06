@@ -7,8 +7,8 @@ class UsuarioAdmin(admin.ModelAdmin):
     
     
 class TipoTreinoAdmin(admin.ModelAdmin):
-    list_display=('nome',)
-    search_fields=('nome',)
+    list_display=('nome','usuario')
+    search_fields=('nome','usuario')
 
 
 class TreinoExercicioInline(admin.TabularInline):

@@ -1,10 +1,11 @@
 from django.views.generic import DeleteView,ListView,UpdateView,FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from treino.forms import FormTreino,FormSetTreinoExercicio,FormSetEditarTreinoExercicio
 from treino.models import Treino
 
 
-class TreinoFormView(FormView):
+class TreinoFormView(LoginRequiredMixin,FormView):
     template_name='formwithformset.html'
     form_class= FormTreino 
     success_url = reverse_lazy('lista_treino')
@@ -22,14 +23,18 @@ class TreinoFormView(FormView):
         formset = self.get_form(FormSetTreinoExercicio)
         
         if formset.is_valid():    
-            treino_salvo = form.save()
+            treino_salvo = form.save(commit=False)
+            # Associando o treino ao usuário logado
+            treino_salvo.usuario = self.request.user  
+            treino_salvo.save()
+            
             formset.instance = treino_salvo
             formset.save()                    
             return super().form_valid(form)
         else:
             return self.form_invalid(formset)
         
-class TreinoListView(ListView):
+class TreinoListView(LoginRequiredMixin,ListView):
     model = Treino
     template_name = "treino/lista_treino.html"
     context_object_name = "treinos"
@@ -40,16 +45,22 @@ class TreinoListView(ListView):
             treino.exercicios = treino.treinoexercicio_set.all()
         return context
     
+    # permite a visualização apenas ao usuario vinculado
+    def get_queryset(self):
+        return Treino.objects.filter(usuario=self.request.user)
 
-class TreinoDeleteView(DeleteView):
+class TreinoDeleteView(LoginRequiredMixin,DeleteView):
     model = Treino
     template_name = "treino/confirmacao_deletar_treino.html"
     success_url = reverse_lazy('lista_treino')
     context_object_name = "treinos"
+    
+    def get_queryset(self):
+        return Treino.objects.filter(usuario=self.request.user)
 
 
     
-class TreinoUpdateView(UpdateView):
+class TreinoUpdateView(LoginRequiredMixin,UpdateView):
     model = Treino
     template_name="formwithformset.html"
     form_class= FormTreino
@@ -65,10 +76,16 @@ class TreinoUpdateView(UpdateView):
         formset = self.get_form(FormSetEditarTreinoExercicio)
         
         if formset.is_valid():    
-            treino_salvo = form.save()
+            treino_salvo = form.save(commit=False)
+            treino_salvo.usuario = self.request.user
+            treino_salvo.save()
+
             formset.instance = treino_salvo
             formset.save()                    
-            return super().form_valid(form)
+            return super().form_valid(formset)
         else:
             return self.form_invalid(formset)
+        
+    def get_queryset(self):
+        return Treino.objects.filter(usuario=self.request.user)
                 
