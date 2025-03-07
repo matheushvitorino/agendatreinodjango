@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from treino.forms import FormTreino,FormSetTreinoExercicio,FormSetEditarTreinoExercicio
 from treino.models import Treino
+from django.shortcuts import render,get_object_or_404
 
 
 class TreinoFormView(LoginRequiredMixin,FormView):
@@ -88,4 +89,10 @@ class TreinoUpdateView(LoginRequiredMixin,UpdateView):
         
     def get_queryset(self):
         return Treino.objects.filter(usuario=self.request.user)
+    
+def iniciar_treino(request,pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    return render(request,'treino/Ttreino.html',{'treino':treino})
+    
+    
                 

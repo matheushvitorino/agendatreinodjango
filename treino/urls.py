@@ -1,5 +1,5 @@
 from django.urls import path
-from treino.views.treino_views import TreinoDeleteView,TreinoListView,TreinoFormView,TreinoUpdateView
+from treino.views.treino_views import TreinoDeleteView,TreinoListView,TreinoFormView,TreinoUpdateView,iniciar_treino
 from .views.usuario_views import UsuarioListView, UsuarioDeleteView, UsuarioFormView, UsuarioUpdateView,CustomLoginView
 from .views.tipo_treino_views import TipoTreinoDeleteView,TipoTreinoFormView,TipoTreinoListView,TipoTreinoUpdateView
 from .views.exercicio_views import ExercicioDeleteView,ExercicioFormView,ExercicioListView,ExercicioUpdateView
@@ -11,6 +11,7 @@ urlpatterns =[
     path('criar_treino/', TreinoFormView.as_view(), name='criar_treino'),
     path('deletar_treino/<int:pk>', TreinoDeleteView.as_view(), name='deletar_treino'),
     path('editar_treino/<int:pk>', TreinoUpdateView.as_view(), name='editar_treino'),
+    path('iniciar_treino/<int:pk>', iniciar_treino, name='iniciar_treino'),
     # Urls de usuarios
     path('usuario/', UsuarioListView.as_view(), name='lista_usuario'),
     path('criar_usuario/', UsuarioFormView.as_view(), name='criar_usuario'),
