@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+    <div>
+        <p>{{treino.nome}}</p>
+        <p> Tipo: {{treino.tipo}}</p>
+        <ul class="list-group">
+            {% for treino_exercicio in treino.treinoexercicio_set.all %}
+            <li class="list-group-item"> 
+                {{treino_exercicio.series}} X de
+                {{treino_exercicio.repeticoes}}
+                {{treino_exercicio.exercicio.nome}}
+            </li>
+            {% endfor %}
+        </ul>
+        <br>
+        <button class="btn btn-success"href="#">Completo</button>
+        <br>
+
+        Criado em: {{treino.criado}}<br>
+    </div>
+
+{% endblock%}

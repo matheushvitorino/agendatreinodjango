@@ -43,9 +43,17 @@
                     </ul>
                     Criado em: {{treino.criado}}<br>
                     <div class="m-3">
-                        <a class="btn btn-danger" href="{% url 'deletar_treino' treino.pk %}">Deletar</a>
-                        <a class="btn btn-success" href="{% url 'editar_treino' treino.pk %}">Editar</a>
+                        <div class="row">
+                            <div class="col-6 text-center"><a class="btn btn-danger" href="{% url 'deletar_treino' treino.pk %}">Deletar</a></div>
+                            <div class="col-6 text-center"><a class="btn btn-success" href="{% url 'editar_treino' treino.pk %}">Editar</a></div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <a class="btn btn-primary" href="{% # %}">Iniciar</a>
+
+                        </div>
                     </div>
+
                 </div>
             </div>
             {% empty %}
