@@ -19,18 +19,18 @@ class TreinoFormView(LoginRequiredMixin,FormView):
    
     #ultima coisa q arrumei ontem 28/10, falta arrumar o else
     def form_valid(self,form):
+        treino_salvo = form.save(commit=False)
+        treino_salvo.usuario = self.request.user
+        treino_salvo.save()
         
-        formset = self.get_form(FormSetTreinoExercicio)
-        
-        if formset.is_valid():    
-            treino_salvo = form.save(commit=False)
-            # Associando o treino ao usuário logado
-            treino_salvo.usuario = self.request.user  
-            treino_salvo.save()
-            
-            formset.instance = treino_salvo
-            formset.save()                    
-            return super().form_valid(form)
+        formset = FormSetTreinoExercicio(self.request.POST, self.request.FILES)
+        if formset.is_valid:
+            for form_exercicio in formset:
+                treino_exercicio = form_exercicio.save(commit=False)
+                treino_exercicio.treino = treino_salvo
+                treino_exercicio.usuario = self.request.user
+                treino_exercicio.save()
+                return super().form_valid(form)
         else:
             return self.form_invalid(formset)
         

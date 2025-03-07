@@ -25,11 +25,12 @@ class FormExercicio(ModelForm):
             queryset = TipoTreino.objects.all(),
             required=True,
         )
+        
     
 class FormTreino(ModelForm):
     class Meta:
         model = Treino
-        fields = ["tipo","usuario","nome"]
+        fields = ["tipo","nome"]
         tipo = forms.ModelChoiceField(
             queryset = TipoTreino.objects.all(),
             required=True,
@@ -51,7 +52,9 @@ class FormTreinoExercicio(ModelForm):
         )
     
     series = forms.ChoiceField(choices=numero_series,
-                               initial=3)    
+                               initial=3)  
+    
+
     
     
 # metodo para adicionar lista de formularios

@@ -3,3 +3,4 @@ treino/__pycache__
 agendatreino/__pycache__
 treino/migrations
 agendatreino/migrations
+db.sqlite3
