@@ -39,6 +39,12 @@ class TreinoExercicio(models.Model):
         return f'Exercicio de {self.exercicio} {self.series}x{self.repeticoes}'
     
 
-    
-
+    class HistoricoTreino(models.Model):
+        usuario = models.ForeignKey(User,related_name='u_historico', on_delete=models.CASCADE)
+        treino = models.ForeignKey(Treino, related_name='historicos', on_delete=models.CASCADE)
+        termino = models.DateTimeField(auto_now_add=True)
+        comentario = models.TextField(blank=True,null=True)
+        
+        def __str__(self):
+            return f'Completo {self.treino.nome}, do usuario {self.usuario}'
     
