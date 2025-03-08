@@ -12,10 +12,14 @@
             </li>
             {% endfor %}
         </ul>
+
         <br>
         <form method="post">
+            <textarea class="mt-2 form-control" id="comentario" name="comentario">
+
+            </textarea>
             {% csrf_token %}
-            <button class="btn btn-success"href="#">Completo</button>
+            <button class="btn btn-success" type="submit">Completo</button>
         </form>
         
         <br>
