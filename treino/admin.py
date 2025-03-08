@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import TipoTreino,Treino,Exercicio,TreinoExercicio
+from .models import TipoTreino,Treino,Exercicio,TreinoExercicio,HistoricoTreino
+
+class HistoricoTreino(admin.ModelAdmin):
+    list_display = ('treino','termino')
+    search_fields=('treino')
 
 class UsuarioAdmin(admin.ModelAdmin):
     list_display=('nome',)
@@ -26,3 +30,4 @@ class TreinoAdmin(admin.ModelAdmin):
 admin.site.register(TipoTreino, TipoTreinoAdmin)
 admin.site.register(Exercicio, ExercicioAdmin)
 admin.site.register(Treino, TreinoAdmin)
+admin.site.register(HistoricoTreino, HistoricoTreinoAdmin)

@@ -2,8 +2,8 @@ from django.views.generic import DeleteView,ListView,UpdateView,FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from treino.forms import FormTreino,FormSetTreinoExercicio,FormSetEditarTreinoExercicio
-from treino.models import Treino
-from django.shortcuts import render,get_object_or_404
+from treino.models import Treino,HistoricoTreino
+from django.shortcuts import render,get_object_or_404,redirect
 
 
 class TreinoFormView(LoginRequiredMixin,FormView):
@@ -92,6 +92,13 @@ class TreinoUpdateView(LoginRequiredMixin,UpdateView):
     
 def iniciar_treino(request,pk):
     treino = get_object_or_404(Treino, pk=pk)
+    
+    if request.method == 'POST':
+        comentario = request.POST.get('comentario')
+        usuario = request.user
+        treino_completo = HistoricoTreino(usuario=usuario,treino=treino,comentario=comentario)
+        treino_completo.save()
+        return redirect('home')
     return render(request,'treino/Ttreino.html',{'treino':treino})
     
     

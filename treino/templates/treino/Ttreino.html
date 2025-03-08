@@ -13,7 +13,11 @@
             {% endfor %}
         </ul>
         <br>
-        <button class="btn btn-success"href="#">Completo</button>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success"href="#">Completo</button>
+        </form>
+        
         <br>
 
         Criado em: {{treino.criado}}<br>
